@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXOM Equipamentos Laboratoriais</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:#f5f5f5;}
+.site{max-width:1100px;margin:20px auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.15);}
+
+/* NAV */
+.nav{background:#0A1F35;padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-mark{width:32px;height:32px;background:#1A7F5A;border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.logo-name{color:#fff;font-size:18px;font-weight:600;letter-spacing:.08em;}
+.logo-tag{color:#4DB890;font-size:10px;letter-spacing:.12em;display:block;margin-top:-2px;}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{color:#8FB8D0;font-size:13px;text-decoration:none;}
+.nav-links a.active{color:#fff;}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.btn-loja{background:transparent;border:1px solid #1A7F5A;color:#4DB890;border-radius:6px;padding:7px 14px;font-size:12px;cursor:pointer;}
+.btn-orcamento{background:#1A7F5A;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;}
+
+/* HERO */
+.hero{background:#0A1F35;padding:52px 28px 56px;position:relative;overflow:hidden;}
+.hero-accent{position:absolute;top:0;right:0;width:300px;height:100%;background:#0F2D4A;clip-path:polygon(20% 0,100% 0,100% 100%,0% 100%);}
+.hero-content{position:relative;z-index:1;}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;background:#0F2D4A;border:1px solid #1A7F5A;border-radius:20px;padding:4px 14px;margin-bottom:16px;}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:#4DB890;}
+.hero-pill span{color:#4DB890;font-size:11px;letter-spacing:.06em;}
+.hero h1{color:#fff;font-size:28px;font-weight:600;line-height:1.3;max-width:520px;margin-bottom:12px;}
+.hero h1 em{color:#4DB890;font-style:normal;}
+.hero p{color:#8FB8D0;font-size:14px;line-height:1.7;max-width:480px;margin-bottom:24px;}
+.hero-btns{display:flex;gap:10px;}
+.btn-p{background:#1A7F5A;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;}
+.btn-s{background:transparent;color:#4DB890;border:1px solid #1A7F5A;border-radius:8px;padding:11px 22px;font-size:14px;cursor:pointer;}
+.hero-stats{display:flex;gap:32px;margin-top:28px;padding-top:24px;border-top:1px solid #0F2D4A;}
+.stat-n{color:#fff;font-size:19px;font-weight:600;}
+.stat-l{color:#4DB890;font-size:11px;margin-top:2px;}
+
+/* NORMAS */
+.normas{background:#071829;padding:12px 28px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.norma{background:#0A1F35;color:#8FB8D0;border:1px solid #1A4F6A;border-radius:4px;font-size:11px;padding:4px 10px;}
+.norma-title{color:#4D7A8A;font-size:11px;}
+
+/* PRODUTOS */
+.section{padding:36px 28px;background:#fff;}
+.sec-header{margin-bottom:22px;}
+.sec-header h2{font-size:20px;font-weight:600;color:#111;}
+.sec-header p{font-size:13px;color:#666;margin-top:4px;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.prod{border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;}
+.prod-top{height:115px;background:#0A1F35;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:12px;}
+.prod-top svg{width:46px;height:46px;margin-bottom:6px;}
+.prod-top-label{color:#4DB890;font-size:10px;font-weight:600;letter-spacing:.05em;text-align:center;}
+.prod-badge{position:absolute;top:8px;right:8px;background:#0F3D28;color:#4DB890;font-size:10px;padding:2px 8px;border-radius:10px;border:1px solid #1A7F5A;}
+.prod-body{padding:14px;}
+.prod-body h3{font-size:13px;font-weight:600;color:#111;margin-bottom:4px;}
+.prod-body p{font-size:12px;color:#666;line-height:1.5;margin-bottom:10px;}
+.specs{display:flex;flex-direction:column;gap:0;margin-bottom:12px;border:1px solid #f0f0f0;border-radius:6px;overflow:hidden;}
+.spec{display:flex;justify-content:space-between;font-size:11px;padding:5px 8px;border-bottom:1px solid #f0f0f0;}
+.spec:last-child{border-bottom:none;}
+.spec-k{color:#888;}
+.spec-v{color:#111;font-weight:600;}
+.prod-cta{width:100%;background:#0A1F35;color:#4DB890;border:none;border-radius:6px;padding:8px;font-size:12px;cursor:pointer;font-weight:600;}
+
+/* DIFERENCIAIS */
+.diffs{background:#f8f9fa;padding:32px 28px;}
+.diff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;}
+.diff{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:16px;}
+.diff-icon{width:32px;height:32px;border-radius:6px;background:#E8F5F0;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.diff h4{font-size:13px;font-weight:600;color:#111;margin-bottom:4px;}
+.diff p{font-size:12px;color:#666;line-height:1.5;}
+
+/* LOJA BANNER */
+.loja-banner{background:#0A1F35;padding:32px 28px;display:flex;align-items:center;justify-content:space-between;}
+.loja-txt h2{color:#fff;font-size:18px;font-weight:600;margin-bottom:6px;}
+.loja-txt p{color:#8FB8D0;font-size:13px;max-width:420px;line-height:1.6;}
+.loja-btn{background:#1A7F5A;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;margin-left:24px;}
+
+/* CONTATO */
+.contato{padding:32px 28px;background:#fff;}
+.contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:20px;}
+.form-g{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.form-g label{font-size:12px;color:#666;font-weight:500;}
+.form-g input,.form-g select,.form-g textarea{background:#f8f9fa;border:1px solid #ddd;border-radius:8px;padding:9px 12px;font-size:13px;color:#111;width:100%;}
+.form-g textarea{height:80px;resize:none;}
+.form-submit{width:100%;background:#1A7F5A;color:#fff;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;}
+.info-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
+.info-icon{width:36px;height:36px;border-radius:8px;background:#E8F5F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.info-b p{font-size:13px;font-weight:600;color:#111;}
+.info-b span{font-size:12px;color:#666;}
+
+/* SUGESTOES DOMINIO */
+.dominios{background:#f0faf5;border:1px solid #b3e6cc;border-radius:10px;padding:16px 20px;margin:20px 28px;}
+.dominios h4{font-size:13px;font-weight:600;color:#0F5C3A;margin-bottom:10px;}
+.dom-list{display:flex;flex-direction:column;gap:6px;}
+.dom-item{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #c8edd8;border-radius:6px;padding:8px 12px;}
+.dom-name{font-size:13px;font-weight:600;color:#111;}
+.dom-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;}
+.dom-rec{background:#0F3D28;color:#4DB890;}
+.dom-ok{background:#E8F5F0;color:#1A7F5A;}
+
+/* FOOTER */
+.footer{background:#071829;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{color:#4DB890;font-size:15px;font-weight:700;letter-spacing:.08em;}
+.footer-sub{color:#4D6A7A;font-size:11px;margin-top:2px;}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{color:#4D6A7A;font-size:12px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="site">
+
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="2"><path d="M3 9l4 4 8-8"/><circle cx="9" cy="9" r="7"/></svg>
+      </div>
+      <div>
+        <span class="logo-name">VEXOM</span>
+        <span class="logo-tag">EQUIPAMENTOS LABORATORIAIS</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Início</a>
+      <a href="#">Produtos</a>
+      <a href="#">Sobre</a>
+      <a href="#">Normas</a>
+      <a href="#">Contato</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn-loja">Loja Virtual</button>
+      <button class="btn-orcamento">Solicitar orçamento</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-accent"></div>
+    <div class="hero-content">
+      <div class="hero-pill"><div class="hero-pill-dot"></div><span>FABRICANTE E DISTRIBUIDOR — BRASIL INTEIRO</span></div>
+      <h1>Precisão e biossegurança para <em>laboratórios de alta exigência</em></h1>
+      <p>Cabines de segurança biológica, capelas de fluxo laminar e workstations para PCR — fabricadas pela VEXOM com rigor técnico, normas NSF e ABNT, suporte especializado e entrega nacional.</p>
+      <div class="hero-btns">
+        <button class="btn-p">Ver catálogo completo</button>
+        <button class="btn-s">Solicitar orçamento</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-n">+9 anos</div><div class="stat-l">de mercado</div></div>
+        <div><div class="stat-n">Brasil todo</div><div class="stat-l">entrega nacional</div></div>
+        <div><div class="stat-n">NSF / ABNT</div><div class="stat-l">normas atendidas</div></div>
+        <div><div class="stat-n">Fabricante</div><div class="stat-l">produção própria</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="normas">
+    <span class="norma-title">Certificações:</span>
+    <span class="norma">NSF/ANSI 49</span>
+    <span class="norma">ABNT NBR 13700</span>
+    <span class="norma">Classe II A2</span>
+    <span class="norma">ISO Classe 5</span>
+    <span class="norma">NR-32</span>
+    <span class="norma">HEPA H14</span>
+    <span class="norma">RDC 302 ANVISA</span>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <h2>Produtos principais</h2>
+      <p>Equipamentos fabricados com foco em biossegurança, contaminação zero e rastreabilidade técnica</p>
+    </div>
+    <div class="prod-grid">
+
+      <div class="prod">
+        <div class="prod-top">
+          <svg viewBox="0 0 44 44" fill="none" stroke="#1A7F5A" stroke-width="1.2"><rect x="4" y="8" width="36" height="30" rx="3"/><line x1="4" y1="22" x2="40" y2="22"/><rect x="12" y="26" width="6" height="8"/><rect x="26" y="26" width="6" height="8"/><line x1="12" y1="15" x2="32" y2="15"/></svg>
+          <span class="prod-top-label">Cabine de segurança biológica</span>
+          <span class="prod-badge">Fab. própria</span>
+        </div>
+        <div class="prod-body">
+          <h3>Cabine de segurança biológica Classe II A2</h3>
+          <p>Proteção simultânea do operador, produto e ambiente. Filtro HEPA H14, fluxo vertical laminarizado.</p>
+          <div class="specs">
+            <div class="spec"><span class="spec-k">Norma</span><span class="spec-v">NSF/ANSI 49</span></div>
+            <div class="spec"><span class="spec-k">Filtro</span><span class="spec-v">HEPA H14 — 99,995%</span></div>
+            <div class="spec"><span class="spec-k">Modelos</span><span class="spec-v">90 / 120 / 180cm</span></div>
+            <div class="spec"><span class="spec-k">Preço</span><span class="spec-v">R$ 22.900 – 42.900</span></div>
+          </div>
+          <button class="prod-cta">Ver especificações e orçar ↗</button>
+        </div>
+      </div>
+
+      <div class="prod">
+        <div class="prod-top">
+          <svg viewBox="0 0 44 44" fill="none" stroke="#1A7F5A" stroke-width="1.2"><rect x="4" y="6" width="36" height="32" rx="3"/><line x1="4" y1="22" x2="40" y2="22"/><line x1="16" y1="6" x2="16" y2="22"/><line x1="28" y1="6" x2="28" y2="22"/><rect x="18" y="26" width="8" height="8"/></svg>
+          <span class="prod-top-label">Capela de fluxo laminar</span>
+          <span class="prod-badge">Fab. própria</span>
+        </div>
+        <div class="prod-body">
+          <h3>Capela de fluxo laminar vertical e horizontal</h3>
+          <p>Ambiente estéril ISO Classe 5 para manipulação de produtos sensíveis. Modelos vertical e horizontal.</p>
+          <div class="specs">
+            <div class="spec"><span class="spec-k">Norma</span><span class="spec-v">ABNT NBR 13700</span></div>
+            <div class="spec"><span class="spec-k">Classe ISO</span><span class="spec-v">ISO 5 — Classe 100</span></div>
+            <div class="spec"><span class="spec-k">Modelos</span><span class="spec-v">60 / 90 / 120cm</span></div>
+            <div class="spec"><span class="spec-k">Preço</span><span class="spec-v">R$ 4.900 – 8.900</span></div>
+          </div>
+          <button class="prod-cta">Ver especificações e orçar ↗</button>
+        </div>
+      </div>
+
+      <div class="prod">
+        <div class="prod-top">
+          <svg viewBox="0 0 44 44" fill="none" stroke="#1A7F5A" stroke-width="1.2"><rect x="6" y="10" width="32" height="26" rx="3"/><line x1="6" y1="22" x2="38" y2="22"/><circle cx="22" cy="31" r="4"/><line x1="14" y1="16" x2="30" y2="16"/></svg>
+          <span class="prod-top-label">Workstation PCR</span>
+          <span class="prod-badge">Alta demanda</span>
+        </div>
+        <div class="prod-body">
+          <h3>Workstation PCR — cabine para biologia molecular</h3>
+          <p>Ambiente livre de DNA/RNA contaminante. UV germicida integrada, aço inox AISI 304.</p>
+          <div class="specs">
+            <div class="spec"><span class="spec-k">UV</span><span class="spec-v">Germicida 30W</span></div>
+            <div class="spec"><span class="spec-k">Material</span><span class="spec-v">Aço inox AISI 304</span></div>
+            <div class="spec"><span class="spec-k">Modelos</span><span class="spec-v">60 / 90 / 120cm</span></div>
+            <div class="spec"><span class="spec-k">Preço</span><span class="spec-v">R$ 3.900 – 6.800</span></div>
+          </div>
+          <button class="prod-cta">Ver especificações e orçar ↗</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="diffs">
+    <div class="sec-header">
+      <h2>Por que a VEXOM?</h2>
+      <p>Diferenciais concretos que fazem diferença para quem compra equipamento técnico</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff">
+        <div class="diff-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><polyline points="2,8 6,12 14,4"/></svg></div>
+        <h4>Fabricante direto</h4>
+        <p>Produção própria de cabines e capelas — sem intermediário, preço justo e suporte do fabricante.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><circle cx="8" cy="8" r="6"/><polyline points="8,5 8,8 10,10"/></svg></div>
+        <h4>Entrega nacional</h4>
+        <p>Atendemos todos os estados com logística especializada para equipamentos de grande porte.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><path d="M2 4h12v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><polyline points="2,4 8,9 14,4"/></svg></div>
+        <h4>Suporte técnico real</h4>
+        <p>Laudos técnicos, qualificação IQ/OQ e adequação NR-32 e ANVISA inclusos.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><rect x="2" y="3" width="12" height="10" rx="1"/><line x1="5" y1="7" x2="11" y2="7"/><line x1="5" y1="10" x2="9" y2="10"/></svg></div>
+        <h4>Documentação completa</h4>
+        <p>Certificado HEPA, laudo de velocidade, NF técnica e manuais em português.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dominios">
+    <h4>Sugestões de domínio para VEXOM</h4>
+    <div class="dom-list">
+      <div class="dom-item"><span class="dom-name">vexom.com.br</span><span class="dom-badge dom-rec">Recomendado</span></div>
+      <div class="dom-item"><span class="dom-name">vexom.com</span><span class="dom-badge dom-ok">Disponível</span></div>
+      <div class="dom-item"><span class="dom-name">vexomlab.com.br</span><span class="dom-badge dom-ok">Alternativa</span></div>
+      <div class="dom-item"><span class="dom-name">loja.vexom.com.br</span><span class="dom-badge dom-ok">Para a loja virtual</span></div>
+    </div>
+  </div>
+
+  <div class="loja-banner">
+    <div class="loja-txt">
+      <h2>Loja Virtual VEXOM</h2>
+      <p>Além do atendimento institucional, a VEXOM tem uma loja virtual completa para compras diretas de equipamentos e consumíveis laboratoriais com frete para todo o Brasil.</p>
+    </div>
+    <button class="loja-btn">Acessar a loja ↗</button>
+  </div>
+
+  <div class="contato">
+    <div class="sec-header">
+      <h2>Solicite seu orçamento</h2>
+      <p>Retornamos em até 1 dia útil com proposta técnica detalhada</p>
+    </div>
+    <div class="contato-grid">
+      <div>
+        <div class="form-g"><label>Nome completo</label><input type="text" placeholder="Seu nome"/></div>
+        <div class="form-g"><label>Empresa / Laboratório</label><input type="text" placeholder="Nome da empresa"/></div>
+        <div class="form-g"><label>Produto de interesse</label>
+          <select><option>Cabine de Segurança Biológica</option><option>Capela de Fluxo Laminar</option><option>Workstation PCR</option><option>Outro produto</option></select>
+        </div>
+        <div class="form-g"><label>Mensagem / Especificações</label><textarea placeholder="Modelo, quantidade, aplicação..."></textarea></div>
+        <button class="form-submit">Enviar solicitação de orçamento</button>
+      </div>
+      <div>
+        <div class="info-item">
+          <div class="info-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><path d="M2 4h12v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><polyline points="2,4 8,9 14,4"/></svg></div>
+          <div class="info-b"><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9aaa6a7bda8bda689bfacb1a6a4e7aaa6a4e7abbb">[email&#160;protected]</a></p><span>Respondemos em até 1 dia útil</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><path d="M2 3a1 1 0 011-1h2.5l1 3-1.5 1.5a10 10 0 004.5 4.5L11 9.5l3 1V13a1 1 0 01-1 1A13 13 0 012 3z"/></svg></div>
+          <div class="info-b"><p>(44) 99915-46245</p><span>WhatsApp e ligações</span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A7F5A" stroke-width="2"><circle cx="8" cy="7" r="3"/><path d="M8 2a5 5 0 00-5 5c0 3.5 5 9 5 9s5-5.5 5-9a5 5 0 00-5-5z"/></svg></div>
+          <div class="info-b"><p>Moreira Sales — PR</p><span>Entrega para todo o Brasil</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="footer-logo">VEXOM</div>
+      <div class="footer-sub">Equipamentos Laboratoriais · vexom.com.br</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">Cabines biológicas</a>
+      <a href="#">Fluxo laminar</a>
+      <a href="#">Workst
