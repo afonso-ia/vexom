@@ -1,33 +1,74 @@
-# Vexom Site (estático)
+# Vortex System
 
-Site institucional estático da Vexom (HTML + CSS + JS), pronto para subir em hospedagem simples.
+Sistema completo de trading algorítmico com arquitetura modular:
+
+- **Backend (Node.js + Express + WebSocket)**
+- **Frontend (React + Vite + Lightweight Charts)**
 
 ## Estrutura
-- `index.html`: página principal com SEO on-page e dados estruturados.
-- `styles.css`: estilos responsivos.
-- `script.js`: menu mobile e simulação de envio do formulário.
-- `robots.txt` e `sitemap.xml`: suporte para indexação.
 
-## Como rodar localmente
-Você pode abrir o `index.html` diretamente no navegador, ou usar um servidor local:
-
-```bash
-python -m http.server 8080
+```text
+/backend
+  server.js
+  services/
+    dataService.js
+    indicatorService.js
+    scoreService.js
+/frontend
+  index.html
+  vite.config.js
+  src/
+    App.jsx
+    styles.css
+    components/
+      Chart.jsx
+      ScorePanel.jsx
 ```
 
-Depois acesse: `http://localhost:8080`
+## Funcionalidades
 
-## Publicação (quando comprar o domínio)
-1. Compre o domínio (ex.: `vexom.com.br`).
-2. Contrate hospedagem estática (Hostinger, Netlify, Vercel, Cloudflare Pages, etc.).
-3. Envie os arquivos do projeto para a raiz do site.
-4. Configure DNS do domínio para a hospedagem.
-5. Ative HTTPS/SSL.
-6. Ajuste os links em `index.html`, `robots.txt` e `sitemap.xml` se necessário.
-7. Cadastre o domínio no Google Search Console e envie o `sitemap.xml`.
+### Backend
+- Consumo de dados OHLCV da Binance (1h, 100 candles).
+- Cálculo de indicadores:
+  - RSI (14)
+  - EMA (9, 21)
+  - MACD (12, 26, 9)
+- Cálculo de score de trading com racional explicativo.
+- Atualização em tempo real via WebSocket a cada 3 segundos.
+- Endpoint REST de snapshot: `GET /api/snapshot`.
 
-## Próximos passos recomendados de SEO
-- Criar páginas individuais de produto (uma URL por produto).
-- Publicar conteúdos de blog para palavras-chave de cauda longa.
-- Integrar formulário com WhatsApp API ou e-mail real.
-- Adicionar Google Analytics 4 e Google Tag Manager.
+### Frontend
+- Conexão com WebSocket em `ws://localhost:3000`.
+- Gráfico candlestick em estilo TradingView com Lightweight Charts.
+- Painel com score, sentimento e indicadores principais.
+- Reconexão automática do WebSocket em caso de queda.
+
+## Como rodar
+
+### 1) Backend
+
+```bash
+cd backend
+npm install
+node server.js
+```
+
+Backend disponível em:
+- HTTP: `http://localhost:3000`
+- WS: `ws://localhost:3000`
+
+### 2) Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend (Vite) disponível em URL exibida no terminal (geralmente `http://localhost:5173`).
+
+## Observações
+- O backend usa Binance Spot REST (`/api/v3/klines`) para snapshots periódicos.
+- Caso a Binance esteja indisponível, o sistema envia mensagens de erro no canal WebSocket sem quebrar o frontend.
+- Você pode customizar no backend: `PORT`, `SYMBOL`, `INTERVAL`, `LIMIT`.
+- Você pode customizar no frontend: `VITE_WS_URL` (default `ws://localhost:3000`).
